@@ -1,0 +1,206 @@
+%! Author = nico
+%! Date = 03.04.23
+\documentclass[a4paper, landscape, 10pt]{scrartcl}
+\usepackage{csquotes}
+\usepackage{subfiles}
+
+% import template
+\input{template/template.tex}
+
+% document information
+\newcommand{\SUBJECT}{}
+\newcommand{\TITLE}{Cheat Sheet für AI Applications (AIAp)}
+% Document
+\begin{document}
+
+    \begin{multicols*}{3}
+        \setlength{\columnseprule}{0pt}
+        \footnotesize
+
+        \section{Artificial Neural Network (ANN)}
+        \includegraphics[width=\columnwidth]{graphic/03-neural-network}
+
+        \section{Convolutional Neural Network (CNN)}
+        \includegraphics[width=\columnwidth]{graphic/02-convolution-architecture}
+        Very efficient operation for image processing: convolution.
+
+        \subsection{Advantages over ANN}
+        \begin{itemize}
+            \item \textbf{Sparse Interaction}
+            \subitem Every input element (pixel) is not connected to every neuron
+            \subitem Kernel is smaller than input
+            \subitem Store fewer parameters, reduces memory requirement of the model
+            \item \textbf{Shared Parameters}
+            \subitem Important property that allows CNNs to detect spatial patterns
+            \subitem
+            \subitem
+            \subitem
+        \end{itemize}
+        
+        \subsection{Feature Detection}
+        \includegraphics[width=\columnwidth]{graphic/00-brain-feature-detectors}
+
+        \subsubsection{Mathematical Model}
+        \textbf{Two Inputs}
+        \begin{itemize}
+            \item Image (width x height for grayscale, or width x height x 3 for RGB)
+            \item Filter \textbf{(=kernel)}
+            \subitem m by n matrix (1 channel grayscale)
+            \subitem m by n x 3 \enquote{stack of matrices} in case of 3 channel input (RGB)
+            \subitem m by n x d \enquote{stack of matrices} (depth of kernel must equal number of input channels)
+        \end{itemize}
+        \textbf{Operation}
+        \begin{itemize}
+            \item Convolution, input image gets convolved with the convolutional kernel
+        \end{itemize}
+        \textbf{One Output}
+        \begin{itemize}
+            \item Feature Map (where is feature active, similar to grayscale image with one channel)
+            \item One convolution produces one feature map
+        \end{itemize}
+
+        \subsection{Process}
+        \includegraphics[width=\columnwidth]{graphic/01-convolution}
+        \begin{itemize}
+            \item Sliding one kernel over entire input produces one feature map
+            \item One kernel combines multiple input channels (e.g. 3 color image, stack of 96 feature maps)
+            \item At each layer mutliple different kernels can be applied
+            \item From a single input we can produce multiple feature maps
+        \end{itemize}
+
+        \subsection{Parameter Stride}
+
+        \subsection{Parameter Padding}
+
+        \subsection{Pooling Variants}
+        \subsubsection{MaxPooling}
+        \subsubsection{AveragePooling}
+        
+        \subsection{Softmax Function}
+
+        \subsection{Sparse Categorical Crossentropy Loss}
+
+        \subsection{Regularization Method}
+        \subsubsection{DropOut}
+        
+        \subsection{Limitations of Convolution}
+
+        
+        \section{Autoencoder}
+        \subsection{Applications}
+        \subsubsection{Compression}
+        \subsubsection{Pretraining useful Conv Kernels without Labels}
+        \subsubsection{Denoising}
+
+        \section{Optimization}
+        \subsection{Data Augmentation}
+        \subsection{Learning Curves}
+        \subsubsection{Underfitting}
+        \subsubsection{Overfitting}
+
+        \subsection{Train, Validation, Test}
+        \begin{itemize}
+            \item Training Set
+            \subitem Used to optimize model
+            \item Validaton Set
+            \subitem Used to evaluate model performance during training
+            \subitem
+        \end{itemize}
+
+        \subsection{k-Fold Cross Validation}
+
+
+        \section{Recurrent Neural Network (RNN)}
+        \subsection{Applications}
+        \begin{itemize}
+            \item Stock prices forecasting
+            \item Weather prediction
+            \item Forecasting traffic
+            \item Text generation
+            \item Anomaly Detection
+        \end{itemize}
+
+        \subsection{Recurrence}
+        
+        \subsection{Memory Cell}
+
+        \subsection{SimpleRNN}
+        
+
+        \subsection{Training}
+        \subsubsection{Backpropagation}
+        \begin{enumerate}
+            \item Initialize Weights
+            \item Until Convergence
+            \subitem Forward pass through network for set of inputs
+            \subitem Calculate Loss
+            \subitem Calculate Gradient
+            \subitem Update Weights
+        \end{enumerate}
+        
+        \subsection{Limitations of vanilla RNNs}
+        \subsubsection{Exploding Gradient Problem}
+
+
+        \subsubsection{Vanishing Gradient Problem}
+
+        \subsubsection{Solutions}
+        \begin{itemize}
+            \item Activation Functions
+        \end{itemize}
+
+        \subsection{DeepRNN}
+
+        \subsection{Bidirectional RNN}
+
+        \subsection{LSTM \tiny{Long-Short-Term-Memory}}
+
+
+        \subsubsection{Gates}
+        \begin{enumerate}
+            \item Forget
+            \item Store / Compute / Input
+            \item Cell / Update
+            \item Output
+        \end{enumerate}
+
+        \subsubsection{Forget Gate}
+        \subsubsection{Input Gate}
+        \subsubsection{Update Gate}
+        \subsubsection{Output Gate}
+        
+        \subsection{GRU \tiny{Gated Recurrent Units}}
+        \subsubsection{GRU Gates}
+        \begin{itemize}
+            \item Reset Gate
+            \item Update Gate
+        \end{itemize}
+
+        \subsubsection{Reset Gate}
+        \subsubsection{Update Gate}
+
+        \subsubsection{Output}
+
+        \subsection{LSTM or GRU?}
+
+        \begin{tabularx}{\columnwidth}{X | X}
+            \textbf{LSTM} & \textbf{GRU} \\
+            + gradient descent more variability & + faster, compacter, fewer parameters, faster training \\
+            \hline
+            + large datasets & + smaller datasets \\
+            \hline
+            + longer sequence & \\
+            + better suited for modelling long-range correlations & \\
+            \hline
+            + 3 Gates (forget, input, output) & + 2 Gates (reset, update) \\
+            \hline
+            & + controls flow of information without cell memory unit \\
+            \hline
+            & + expose complete memory without any control
+        \end{tabularx}
+
+        TODO: continue with ATTENTION (WEEK 7)
+
+    \end{multicols*}
+
+\end{document}
